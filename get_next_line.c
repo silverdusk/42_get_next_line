@@ -6,7 +6,7 @@
 /*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:35 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/22 22:45:04 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:59:36 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_strnjoin(char *s1, char *s2, size_t len)
 	if (!new_str)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s1 && s1[i] != '\0')
 	{
 		new_str[i] = s1[i];
 		i++;
@@ -98,7 +98,6 @@ char	*ft_strnjoin(char *s1, char *s2, size_t len)
 	}
 	new_str[i + j] = '\0';
 	free(s1);
-	printf("joined_string %s\n", new_str);
 	return (new_str);
 }
 
@@ -115,7 +114,6 @@ char *get_next_line(int fd){
 	// read from file descriptor
 	while (1)
 	{
-		printf("Here\n");
 		if (read(fd, buf, BUFFER_SIZE) < 0)
 		{
 			free(line);
@@ -124,12 +122,11 @@ char *get_next_line(int fd){
 		i = 0;
 		while (i < BUFFER_SIZE)
 		{
-			printf("Here2\n");
 			if (buf[i] == '\n' || (buf[i] == '\0'))
 			{
 				line = ft_strnjoin(line, buf, i);
-				ft_buffmove(buf, i);
-				printf("Here3\n");
+				ft_buffmove(buf, i + 1);
+				printf("buf: %s\n", buf);
 				return (line);
 			}
 			i++;
@@ -137,7 +134,6 @@ char *get_next_line(int fd){
 		line = ft_strnjoin(line, buf, BUFFER_SIZE);
 		if (!line)
 		{
-			printf("Here4\n");
 			return (NULL);
 		}
 	}
@@ -151,9 +147,24 @@ char *get_next_line(int fd){
 int main(int argc, char const *argv[])
 {
 	int fd = 0;
+	char *line;
+
 	fd = open("test.txt", O_RDONLY);
 	// printf("%s\n", get_next_line(-1));
-	printf("%s\n", get_next_line(fd));
+	//line = get_next_line(fd);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+
+	printf("%s", get_next_line(fd));
+	// while (line)
+	// {
+	// 	printf("%s\n", line);
+	// 	line = get_next_line(fd);
+	// }
 
 	return 0;
 }
