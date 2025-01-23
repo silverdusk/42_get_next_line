@@ -6,7 +6,7 @@
 /*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:35 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/23 23:11:34 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/23 23:15:20 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ void	*ft_buffmove(char *buf, size_t start)
 	size_t	i;
 
 	i = 0;
-
 	if (!buf || start >= ft_strlen(buf))
 	{
 		buf[0] = '\0';
 		return (NULL);
 	}
-
 	while (buf[start])
 	{
 		buf[i] = buf[start];
@@ -126,7 +124,6 @@ static int	buffer_initializer(int fd, char *buf, char **line)
 	{
 		return (1);
 	}
-
 }
 
 char	*get_next_line(int fd)
