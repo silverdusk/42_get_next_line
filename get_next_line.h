@@ -6,7 +6,7 @@
 /*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:48 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/25 13:56:37 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:09:49 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8
+#  define BUFFER_SIZE 42
 # endif
 
 // ================== get_next_line_utils.c ==================

@@ -6,7 +6,7 @@
 /*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:35 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/25 13:54:48 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:15:52 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,3 +143,74 @@ int main()
 
 	return 0;
 } */
+/*
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "get_next_line.h"
+
+// A helper to read and print lines until NULL
+void    read_and_print_all_lines(int fd)
+{
+    char *line;
+    int  line_num = 1;
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("Line %d: \"%s\"\n", line_num++, line);
+        free(line);
+    }
+}
+
+void    test_with_file(const char *filename, const char *description)
+{
+    int fd = open(filename, O_RDONLY);
+    if (fd < 0)
+    {
+        perror("open");
+        return;
+    }
+    printf("=== %s ===\n", description);
+    read_and_print_all_lines(fd);
+    close(fd);
+    printf("=== End of %s ===\n\n", description);
+}
+
+int main(void)
+{
+    // Test 1: multiple short lines
+    test_with_file("test1.txt", "Test 1: multiple short lines");
+
+    // Test 2: single long line (exceeds BUFFER_SIZE)
+    test_with_file("test2.txt", "Test 2: single long line");
+
+    // Test 3: empty file
+    test_with_file("test3.txt", "Test 3: empty file");
+
+    // Test 4: file with no newline
+    test_with_file("test4.txt", "Test 4: no newline in file");
+
+    // Test 5: file with only newlines
+    test_with_file("test5.txt", "Test 5: file with only newlines");
+
+    // Test 6: invalid file descriptor
+    printf("=== Test 6: invalid file descriptor ===\n");
+    int invalid_fd = -1;
+    char *line = get_next_line(invalid_fd);
+    if (!line)
+        printf("As expected, get_next_line returned NULL for invalid fd.\n");
+    else
+    {
+        printf("Unexpectedly got a line: %s\n", line);
+        free(line);
+    }
+    printf("=== End of Test 6 ===\n\n");
+
+    // printf("=== Test 7: reading from STDIN
+	//		(type lines, press Ctrl+D to end) ===\n");
+    // read_and_print_all_lines(STDIN_FILENO);
+    // printf("=== End of Test 7 ===\n");
+
+    return 0;
+}*/
