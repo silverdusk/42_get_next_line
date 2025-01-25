@@ -6,7 +6,7 @@
 /*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:48 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/18 17:19:30 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:56:37 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 #  define BUFFER_SIZE 8
 # endif
 
-char *get_next_line(int fd);
+// ================== get_next_line_utils.c ==================
+size_t		ft_strlen(const char *s);
+int			ft_strncpy(char *dst, const char *src, size_t len);
+char		*ft_allocate_new_str(size_t s1_len, size_t len);
+
+// ===================== get_next_line.c =====================
+int			refill_buffer(int fd, char *buf, char **line);
+int			buffer_initializer(int fd, char *buf, char **line);
+char		*ft_strnjoin(char *s1, char *s2, size_t len);
+void		*ft_buffmove(char *buf, size_t start);
+char		*get_next_line(int fd);
 
 #endif

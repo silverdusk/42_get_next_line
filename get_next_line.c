@@ -6,68 +6,37 @@
 /*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:35 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/23 23:15:20 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:54:48 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	refill_buffer(int fd, char *buf, char **line)
 {
-	size_t	i;
+	int	bytes_read;
 
-	if (!s)
+	bytes_read = read(fd, buf, BUFFER_SIZE);
+	if (bytes_read < 0)
 	{
-		return (0);
+		free(*line);
+		*line = NULL;
+		return (-1);
 	}
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	buf[bytes_read] = '\0';
+	return (bytes_read);
 }
 
-int	ft_strncpy(char *dst, const char *src, size_t len)
+int	buffer_initializer(int fd, char *buf, char **line)
 {
-	size_t	i;
-
-	if (!dst || !src)
-		return (EXIT_FAILURE);
-	i = 0;
-	while (src[i] && i < len)
+	if (buf[0] == '\0')
 	{
-		dst[i] = src[i];
-		i++;
+		return (refill_buffer(fd, buf, line));
 	}
-	dst[i] = '\0';
-	return (EXIT_SUCCESS);
-}
-
-void	*ft_buffmove(char *buf, size_t start)
-{
-	size_t	i;
-
-	i = 0;
-	if (!buf || start >= ft_strlen(buf))
+	else
 	{
-		buf[0] = '\0';
-		return (NULL);
+		return (1);
 	}
-	while (buf[start])
-	{
-		buf[i] = buf[start];
-		i++;
-		start++;
-	}
-	buf[i] = '\0';
-	return (buf);
-}
-
-char	*ft_allocate_new_str(size_t s1_len, size_t len)
-{
-	char	*new_str;
-
-	new_str = malloc(s1_len + len + 1);
-	return (new_str);
 }
 
 char	*ft_strnjoin(char *s1, char *s2, size_t len)
@@ -99,31 +68,24 @@ char	*ft_strnjoin(char *s1, char *s2, size_t len)
 	return (free(s1), new_str);
 }
 
-static int	refill_buffer(int fd, char *buf, char **line)
+void	*ft_buffmove(char *buf, size_t start)
 {
-	int	bytes_read;
+	size_t	i;
 
-	bytes_read = read(fd, buf, BUFFER_SIZE);
-	if (bytes_read < 0)
+	i = 0;
+	if (!buf || start >= ft_strlen(buf))
 	{
-		free(*line);
-		*line = NULL;
-		return (-1);
+		buf[0] = '\0';
+		return (NULL);
 	}
-	buf[bytes_read] = '\0';
-	return (bytes_read);
-}
-
-static int	buffer_initializer(int fd, char *buf, char **line)
-{
-	if (buf[0] == '\0')
+	while (buf[start])
 	{
-		return (refill_buffer(fd, buf, line));
+		buf[i] = buf[start];
+		i++;
+		start++;
 	}
-	else
-	{
-		return (1);
-	}
+	buf[i] = '\0';
+	return (buf);
 }
 
 char	*get_next_line(int fd)
@@ -154,7 +116,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-# include <stdio.h>
+/* # include <stdio.h>
 // TODO check if "read" values valid for moulinette
 // Test with valgrind to make sure you are not leaking memory
 
@@ -180,4 +142,4 @@ int main()
 	// }
 
 	return 0;
-}
+} */
