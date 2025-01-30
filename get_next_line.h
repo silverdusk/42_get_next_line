@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
+/*   By: kmatskev <kmatskev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:48 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/25 17:09:49 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:26:59 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+# endif
+
+# ifndef FD_MAX
+#  define FD_MAX 4096
 # endif
 
 // ================== get_next_line_utils.c ==================

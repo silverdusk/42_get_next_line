@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmatskev <matskevich.ke@gmail.com>         +#+  +:+       +#+        */
+/*   By: kmatskev <kmatskev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:57:35 by kmatskev          #+#    #+#             */
-/*   Updated: 2025/01/25 17:15:52 by kmatskev         ###   ########.fr       */
+/*   Updated: 2025/01/30 20:54:58 by kmatskev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 	int			i;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX - 1)
 		return (NULL);
 	while (1)
 	{
@@ -128,13 +128,13 @@ int main()
 	// printf("%s\n", get_next_line(-1));
 	//line = get_next_line(fd);
 	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
 
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
 
-	printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
 	// while (line)
 	// {
 	// 	printf("%s\n", line);
